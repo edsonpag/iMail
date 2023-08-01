@@ -1,41 +1,27 @@
-const nodemailer = require('nodemailer')
-const { db } = require('../firebase/firebase.js')
+const { db } = require('../firebase/firebase.js');
+const NodemailerService = require('../services/NodemailerService.js');
 
-const send = async (req, res) => {
-    const mailOptions = req.body;
-    const transporter = nodemailer.createTransport({
-        host: "smtp.hostinger.com",
-        port: 465,
-        secure: true,
-        auth: {
-            user: process.env.DIGITAL_QUIZ_EMAIL,
-            pass: process.env.DIGITAL_QUIZ_PASSWORD
+class EmailController {
+    
+    nodemailerService = new NodemailerService()
+
+    send = async (req, res) => {
+        const transporter = this.nodemailerService.createTransporter()
+        const emailOptions = req.body
+        try {
+            res.json(await this.nodemailerService.sendEmail(transporter, emailOptions))
+        } catch (err) {
+            res.json(err)
         }
-    });
-    let responseMsg = "";
-    await new Promise((resolve, reject) => {
-        transporter.sendMail(mailOptions, function(err, data) {
-            if (err) {
-                responseMsg = err.message;
-                reject(err)
-            } else {
-                responseMsg = "Email enviado com sucesso"
-                resolve(data)
-            }
-        });
-    })
-    res.json({
-        msg: responseMsg
-    })
+    }
+    
+    save = async (req, res) => {
+        const email = req.body
+        console.log(email)
+        await db.collection('emails').add(email)
+        res.send("Rapaiz mais não é que deu boa mesmo")
+    }
 }
 
-const save = async (req, res) => {
-    const email = req.body;
-    console.log(email)
-    await db.collection('emails').add(email)
-    res.send("Rapaiz mais não é que deu boa mesmo");
-}
 
-module.exports = {
-    send, save
-}
+module.exports = EmailController
