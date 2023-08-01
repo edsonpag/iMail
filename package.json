@@ -4,8 +4,7 @@
   "description": "",
   "main": "./src/api.js",
   "scripts": {
-    "start": "./node_modules/.bin/netlify-lambda serve src",
-    "build": "./node_modules/.bin/netlify-lambda build src"
+    "start": "netlify dev"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +13,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "netlify-lambda": "^2.0.16",
+    "firebase-admin": "^11.10.1",
+    "netlify-cli": "^15.10.0",
     "nodemailer": "^6.9.4",
     "serverless-http": "^3.2.0"
   }

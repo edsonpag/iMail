@@ -1,4 +1,5 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer')
+const { db } = require('../firebase/firebase.js')
 
 const send = async (req, res) => {
     const mailOptions = req.body;
@@ -29,6 +30,14 @@ const send = async (req, res) => {
     })
 }
 
+const save = async (req, res) => {
+    // creationDate, shooting date
+    const email = req.body;
+    console.log(email)
+    await db.collection('emails').add(email)
+    res.send("Rapaiz mais não é que deu boa mesmo");
+}
+
 module.exports = {
-    send
+    send, save
 }
