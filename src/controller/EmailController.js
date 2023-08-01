@@ -30,7 +30,6 @@ const send = async (req, res) => {
 }
 
 const save = async (req, res) => {
-    // creationDate, shooting date
     const email = req.body;
     console.log(email)
     await db.collection('emails').add(email)
