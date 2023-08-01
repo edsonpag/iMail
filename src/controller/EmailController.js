@@ -1,7 +1,7 @@
-const FirebaseService = require('../services/FirebaseService.js');
-const NodemailerService = require('../services/NodemailerService.js');
+import FirebaseService from '../services/FirebaseService.js';
+import NodemailerService from '../services/NodemailerService.js';
 
-class EmailController {
+export default class EmailController {
     
     nodemailerService = new NodemailerService()
 
@@ -24,6 +24,3 @@ class EmailController {
         })
     }
 }
-
-
-module.exports = EmailController

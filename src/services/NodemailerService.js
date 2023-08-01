@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer')
+import nodemailer from 'nodemailer'
 
-class NodemailerService {
+export default class NodemailerService {
 
     createTransporter = () => {
         return nodemailer.createTransport({
@@ -26,5 +26,3 @@ class NodemailerService {
         })
     }
 }
-
-module.exports = NodemailerService

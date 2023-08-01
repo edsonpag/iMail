@@ -1,14 +1,15 @@
-const { initializeApp, cert } = require('firebase-admin/app')
-const { getFirestore } = require('firebase-admin/firestore')
-const serviceAccount = require('../../firebaseCredentials.json')
+import { initializeApp, cert } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
+import { createRequire } from 'module'
 
-class FirebaseService {
+export default class FirebaseService {
 
     database = null
 
     constructor() {
+        const require = createRequire(import.meta.url)
         initializeApp({
-            credential: cert(serviceAccount)
+            credential: cert(require('../../firebaseCredentials.json'))
         })
         this.database = getFirestore()
     }
@@ -17,5 +18,3 @@ class FirebaseService {
         await this.database.collection(collection).add(value)
     }
 }
-
-module.exports = FirebaseService
