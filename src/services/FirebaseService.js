@@ -8,8 +8,9 @@ export default class FirebaseService {
 
     constructor() {
         const require = createRequire(import.meta.url)
+        const serviceAccount = require('../../resources/firebase/firebaseCredentials.json')
         initializeApp({
-            credential: cert(require('../../firebaseCredentials.json'))
+            credential: cert(serviceAccount)
         })
         this.database = getFirestore()
     }

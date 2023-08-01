@@ -1,5 +1,5 @@
 import express from 'express'
-import EmailController from '../controller/EmailController.js'
+import EmailController from '../controllers/EmailController.js'
 
 const router = express.Router()
 const emailController = new EmailController()
