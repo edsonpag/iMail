@@ -25,7 +25,6 @@ const send = async (req, res) => {
         });
     })
     res.json({
-        success: true,
         msg: responseMsg
     })
 }
