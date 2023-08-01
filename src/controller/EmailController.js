@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 const send = async (req, res) => {
     const mailOptions = req.body;
-    const transporter = await  nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
         host: "smtp.hostinger.com",
         port: 465,
         secure: true,
@@ -11,20 +11,21 @@ const send = async (req, res) => {
             pass: process.env.DIGITAL_QUIZ_PASSWORD
         }
     });
+    let responseMsg = "";
     await new Promise((resolve, reject) => {
         transporter.sendMail(mailOptions, function(err, data) {
             if (err) {
-                console.log(err)
+                responseMsg = err.message;
                 reject(err)
             } else {
-                console.log("Email enviado com sucesso");
+                responseMsg = "Email enviado com sucesso"
                 resolve(data)
             }
         });
     })
     res.json({
         success: true,
-        msg: "ok"
+        msg: responseMsg
     })
 }
 
