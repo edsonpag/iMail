@@ -14,7 +14,8 @@ class NodemailerService {
         })
     }
     
-    sendEmail = async (transporter, mailOptions) => {
+    sendEmail = async (mailOptions) => {
+        const transporter = this.createTransporter()
         return await new Promise((resolve, reject) => {
             transporter.sendMail(mailOptions, function (err, data) {
                 if (err)

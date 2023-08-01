@@ -1,15 +1,16 @@
-const { db } = require('../firebase/firebase.js');
+const FirebaseService = require('../services/FirebaseService.js');
 const NodemailerService = require('../services/NodemailerService.js');
 
 class EmailController {
     
     nodemailerService = new NodemailerService()
 
+    firebaseService = new FirebaseService()
+
     send = async (req, res) => {
-        const transporter = this.nodemailerService.createTransporter()
         const emailOptions = req.body
         try {
-            res.json(await this.nodemailerService.sendEmail(transporter, emailOptions))
+            res.json(await this.nodemailerService.sendEmail(emailOptions))
         } catch (err) {
             res.json(err)
         }
@@ -17,9 +18,10 @@ class EmailController {
     
     save = async (req, res) => {
         const email = req.body
-        console.log(email)
-        await db.collection('emails').add(email)
-        res.send("Rapaiz mais não é que deu boa mesmo")
+        await this.firebaseService.save('emails', email)
+        res.json({
+            message: "Email salvo com sucesso"
+        })
     }
 }
 
