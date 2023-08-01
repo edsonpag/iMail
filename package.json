@@ -4,7 +4,8 @@
   "description": "",
   "main": "./src/api.js",
   "scripts": {
-    "start": "netlify dev"
+    "start": "netlify dev",
+    "build": "netlify build"
   },
   "keywords": [],
   "author": "",
