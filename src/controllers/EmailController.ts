@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import FirebaseService from '../services/FirebaseService.js';
 import NodemailerService from '../services/NodemailerService.js';
 
@@ -7,7 +8,7 @@ export default class EmailController {
 
     firebaseService = new FirebaseService()
 
-    send = async (req, res) => {
+    send = async (req: Request, res: Response) => {
         const emailOptions = req.body
         try {
             res.json(await this.nodemailerService.sendEmail(emailOptions))
@@ -16,9 +17,9 @@ export default class EmailController {
         }
     }
     
-    save = async (req, res) => {
+    save = async (req: Request, res: Response) => {
         const email = req.body
-        await this.firebaseService.save('emails', email)
+        await this.firebaseService.save('Email', email)
         res.json({
             message: "Email salvo com sucesso"
         })
