@@ -13,6 +13,6 @@ app.use(express.urlencoded({
     extended: true
 }))
 app.use(router)
-new EmailJob().init()
+new EmailJob().init() // provisorio
 
 app.listen(3000)
