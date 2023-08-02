@@ -1,4 +1,4 @@
-import nodemailer, { Transporter, SendMailOptions } from 'nodemailer'
+import nodemailer, { SendMailOptions } from 'nodemailer'
 
 export default class NodemailerService {
 
