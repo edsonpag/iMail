@@ -6,18 +6,17 @@ export default class EmailController {
     
     send = async (req: Request, res: Response) => {
         const emailOptions = req.body
-        const nodemailerService = new NodemailerService(emailOptions)
         try {
-            res.json(await nodemailerService.sendEmail())
+            res.json(await new NodemailerService(emailOptions).sendEmail())
         } catch (err) {
             res.json(err)
         }
     }
     
     save = async (req: Request, res: Response) => {
-        const email = req.body
-        const firebaseService = new FirebaseService('Email', email)
-        firebaseService.save()
+        const collection = 'Email'
+        const value = req.body
+        new FirebaseService(collection, value).save()
         res.json({
             message: "Email salvo com sucesso"
         })
