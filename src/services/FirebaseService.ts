@@ -7,4 +7,8 @@ export default class FirebaseService {
     save = async (collection: string, value: any) => {
         await FirebaseService.database.collection(collection).add(value)
     }
+
+    getEmailsToSend = async () => {
+        return await FirebaseService.database.collection('Email').where('sent', '==', false).where('shootingDate', '<=', new Date()).get()
+    }
 }

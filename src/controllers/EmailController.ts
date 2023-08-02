@@ -1,6 +1,7 @@
-import { Request, Response } from 'express';
-import FirebaseService from '../services/FirebaseService.js';
-import NodemailerService from '../services/NodemailerService.js';
+import { Request, Response } from 'express'
+import FirebaseService from '../services/FirebaseService.js'
+import NodemailerService from '../services/NodemailerService.js'
+import Email from '../interfaces/Email.js'
 
 export default class EmailController {
     
@@ -19,7 +20,17 @@ export default class EmailController {
     
     save = async (req: Request, res: Response) => {
         const collection = 'Email'
-        const value = req.body
+        const body = req.body
+        const value: Email = {
+            from: body.from,
+            to: body.to,
+            subject: body.subject,
+            text: body.text,
+            fullname: body.fullname,
+            profession: body.profession,
+            shootingDate: new Date(body.shootingDate),
+            sent: false
+        }
         this.firebaseService.save(collection, value)
         res.json({
             message: "Email salvo com sucesso"
