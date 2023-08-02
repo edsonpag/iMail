@@ -1,7 +1,7 @@
 import express from 'express'
-import emailRouter from './EmailRouter'
+import emailRouter from './emailRouter'
 
 const router = express.Router()
-router.use(emailRouter)
+router.use('/email', emailRouter)
 
 export default router

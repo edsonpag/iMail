@@ -5,16 +5,22 @@ import serviceAccount from '../resources/firebase/firebaseCredentials.json'
 
 export default class FirebaseService {
 
-    database: FirebaseFirestore.Firestore | null = null
+    private database: FirebaseFirestore.Firestore;
 
-    constructor() {
+    private collection: string
+
+    private value: any
+
+    constructor(collection: string, value: any) {
         initializeApp({
             credential: cert(serviceAccount as ServiceAccount)
         })
         this.database = getFirestore()
+        this.collection = collection
+        this.value = value
     }
 
-    save = async (collection: string, value: any) => {
-        await this.database?.collection(collection).add(value)
+    save = async () => {
+        await this.database?.collection(this.collection).add(this.value)
     }
 }

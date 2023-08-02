@@ -1,9 +1,9 @@
-import express from 'express'
+import express, { Application } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import router from './routes/routes.js'
 
-const app = express()
+const app: Application = express()
 
 dotenv.config()
 app.use(cors())
@@ -13,4 +13,4 @@ app.use(express.urlencoded({
 }))
 app.use(router)
 
-app.listen(3000);
+app.listen(3000)

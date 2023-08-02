@@ -1,8 +1,17 @@
-import nodemailer from 'nodemailer'
+import nodemailer, { Transporter, SendMailOptions } from 'nodemailer'
 
 export default class NodemailerService {
 
-    createTransporter = () => {
+    private transporter: Transporter
+
+    private mailOptions: SendMailOptions
+
+    constructor(mailOptions: SendMailOptions) {
+        this.transporter = this.createTransporter()
+        this.mailOptions = mailOptions
+    }
+    
+    private createTransporter = (): Transporter => {
         return nodemailer.createTransport({
             host: "smtp.hostinger.com",
             port: 465,
@@ -13,11 +22,10 @@ export default class NodemailerService {
             }
         })
     }
-    
-    sendEmail = async (mailOptions: any) => {
-        const transporter = this.createTransporter()
+
+    sendEmail = async () => {
         return await new Promise((resolve, reject) => {
-            transporter.sendMail(mailOptions, function (err, data) {
+            this.transporter.sendMail(this.mailOptions, (err, data) => {
                 if (err)
                     reject(err)
                 else
