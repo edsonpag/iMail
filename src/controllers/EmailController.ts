@@ -9,16 +9,7 @@ export default class EmailController {
 
     firebaseService = new FirebaseService()
 
-    send = async (req: Request, res: Response) => {
-        const emailOptions = req.body
-        try {
-            res.json(await this.nodemailerService.sendEmail(emailOptions))
-        } catch (err) {
-            res.json(err)
-        }
-    }
-    
-    save = async (req: Request, res: Response) => {
+    store = async (req: Request, res: Response) => {
         const collection = 'Email'
         const body = req.body
         const value: Email = {
@@ -35,5 +26,14 @@ export default class EmailController {
         res.json({
             message: "Email salvo com sucesso"
         })
+    }
+
+    send = async (req: Request, res: Response) => {
+        const emailOptions = req.body
+        try {
+            res.json(await this.nodemailerService.sendEmail(emailOptions))
+        } catch (err) {
+            res.json(err)
+        }
     }
 }

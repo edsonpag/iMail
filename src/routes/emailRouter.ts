@@ -4,7 +4,7 @@ import EmailController from '../controllers/EmailController'
 const emailRouter = express.Router()
 const emailController = new EmailController()
 
-emailRouter.post('/save', emailController.save)
+emailRouter.post('/store', emailController.store)
 emailRouter.post('/send', emailController.send)
 
 export default emailRouter

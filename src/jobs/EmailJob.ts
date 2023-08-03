@@ -15,3 +15,5 @@ export default class EmailJob {
         })
     }
 }
+
+// new EmailJob().init() // provisorio
