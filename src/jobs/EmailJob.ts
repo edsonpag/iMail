@@ -11,7 +11,7 @@ export default class EmailJob {
     nodemailerService = new NodemailerService()
 
     init = () => {
-        cron.schedule('*/14 * * * *', async () => {
+        cron.schedule('*/1 * * * *', async () => {
             const docs = await this.firebaseService.getEmailsToSend()
             if (!docs.empty) {
                 docs.forEach(doc => {
