@@ -1,10 +1,10 @@
 export default interface Email {
-    from: String
-    to: String
-    subject: String
-    text: String
-    fullname: String
-    profession: String
+    from: string
+    to: string
+    subject: string
+    text: string
+    fullname: string
+    profession: string
     shootingDate: Date
     sent: Boolean
 }
