@@ -13,17 +13,21 @@ export default class EmailJob {
     init = () => {
         cron.schedule('*/15 * * * *', async () => {
             const docs = await this.firebaseService.getEmailsToSend()
-            docs.forEach(doc => {
-                const data = doc.data() as Email
-                const emailOptions: SendMailOptions = {
-                    from: data.from,
-                    to: data.to,
-                    subject: data.subject,
-                    text: data.text
-                }
-                this.nodemailerService.sendEmail(emailOptions)
-                this.firebaseService.changeEmailSentStatus(data, true)
-            })
+            if (!docs.empty) {
+                docs.forEach(doc => {
+                    if (doc.exists) {
+                        const data = doc.data() as Email
+                        const emailOptions: SendMailOptions = {
+                            from: data.from,
+                            to: data.to,
+                            subject: data.subject,
+                            text: data.text
+                        }
+                        this.nodemailerService.sendEmail(emailOptions)
+                        this.firebaseService.changeEmailSentStatus(data, true)
+                    }
+                })
+            }
         })
     }
 }
