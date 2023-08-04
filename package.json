@@ -7,7 +7,7 @@
     "node": "18"
   },
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsup src",
     "start": "node dist/api.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/api.js\""
   },
@@ -30,6 +30,7 @@
     "@types/node-cron": "^3.0.8",
     "@types/nodemailer": "^6.4.9",
     "concurrently": "^8.2.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "tsup": "^7.2.0"
   }
 }
