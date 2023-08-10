@@ -18,7 +18,6 @@ export default class FirebaseService {
             .where('from', '==', email.from)
             .where('to', '==', email.to)
             .where('subject', '==', email.subject)
-            .where('text', '==', email.text)
             .where('fullname', '==', email.fullname)
             .where('profession', '==', email.profession)
             .where('shootingDate', '==', email.shootingDate)
