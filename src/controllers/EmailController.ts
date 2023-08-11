@@ -16,10 +16,11 @@ export default class EmailController {
             from: body.from,
             to: body.to,
             subject: body.subject,
-            text: body.text,
+            templateCode: body.templateCode,
             fullname: body.fullname,
             profession: body.profession,
             shootingDate: new Date(body.shootingDate),
+            checkoutLink: body.checkoutLink,
             sent: false
         }
         this.firebaseService.save(collection, value)
