@@ -27,7 +27,6 @@ export default class NodemailerService {
     }
     
     sendEmail = async (mailOptions: any) => {
-        mailOptions.from = `Digital Quiz <contato03@digitalquiz.com.br>`
         const transporter = this.createTransporter(mailOptions)
         return await new Promise((resolve, reject) => {
             transporter.sendMail(mailOptions, (err, data) => {
