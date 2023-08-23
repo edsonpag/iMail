@@ -1,16 +1,18 @@
-import nodemailer, { SendMailOptions } from 'nodemailer'
+import nodemailer from 'nodemailer'
 import hbs from 'nodemailer-express-handlebars'
 import path from 'path'
 
 export default class NodemailerService {
 
-    private createTransporter = () => {
+    private createTransporter = (mailOptions: any) => {
+        const emails = ['contato@digitalquiz.com.br', 'comercial@digitalquiz.com.br', 'contato02@digitalquiz.com.br', 'contato03@digitalquiz.com.br', 'contato04@digitalquiz.com.br', 'contato05@digitalquiz.com.br', 'contato06@digitalquiz.com.br', 'contato07@digitalquiz.com.br', 'contato08@digitalquiz.com.br', 'contato09@digitalquiz.com.br', 'contato10@digitalquiz.com.br']
+        const selectedEmail = emails.find(email => mailOptions.from.includes(email))
         let transporter = nodemailer.createTransport({
             host: "smtp.hostinger.com",
             port: 465,
             secure: true,
             auth: {
-                user: process.env.DIGITAL_QUIZ_EMAIL,
+                user: selectedEmail,
                 pass: process.env.DIGITAL_QUIZ_PASSWORD
             }
         })
@@ -25,7 +27,8 @@ export default class NodemailerService {
     }
     
     sendEmail = async (mailOptions: any) => {
-        const transporter = this.createTransporter()
+        mailOptions.from = `Digital Quiz <contato03@digitalquiz.com.br>`
+        const transporter = this.createTransporter(mailOptions)
         return await new Promise((resolve, reject) => {
             transporter.sendMail(mailOptions, (err, data) => {
                 if (err)
